@@ -1,0 +1,14 @@
+- hosts: localhost
+  tasks:
+    - name: install kvm
+      apt: name={{ item }} state=latest
+      with_items:
+           - qemu-kvm
+           - libvirt-bin
+           - virtinst
+           - bridge-utils
+           - virt-manager
+      become: yes
+    - name: add user to group libvirtd
+      user: name=user state=present groups=libvirtd
+      become: yes
